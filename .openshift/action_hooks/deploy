@@ -1,0 +1,2 @@
+# Copy over configuration, overwriting existing configuration
+cp -R $OPENSHIFT_REPO_DIR/solr.home/* $OPENSHIFT_DATA_DIR/solr.home/;

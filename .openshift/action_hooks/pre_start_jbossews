@@ -1,0 +1,1 @@
+export JAVA_OPTS="-Dsolr.solr.home=$OPENSHIFT_DATA_DIR/solr.home"
