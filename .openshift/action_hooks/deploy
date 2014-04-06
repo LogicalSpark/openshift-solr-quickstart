@@ -1,6 +1,6 @@
 # Hack for scaleable apps - if no solr.home found, then rebuild (as probably on another node)
 if [ ! -d $OPENSHIFT_DATA_DIR/solr.home ]; then
-  ./build
+  $OPENSHIFT_REPO_DIR/.openshift/action_hooks/build
 fi;
 
 # Copy over configuration
