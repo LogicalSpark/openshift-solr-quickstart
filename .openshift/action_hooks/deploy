@@ -1,24 +1,8 @@
-cd $OPENSHIFT_DATA_DIR
+# Hack for scaleable apps - if no solr.home found, then rebuild (as probably on another node)
 if [ ! -d $OPENSHIFT_DATA_DIR/solr.home ]; then
-  # Get latest Apache Solr binary package
-  wget -c http://apache.org/dist/lucene/solr/4.7.1/solr-4.7.1.tgz && tar zxf solr-4.7.1.tgz;
-  
-  # Create Solr Home directory structure
-  mkdir -p $OPENSHIFT_DATA_DIR/solr.home;
-  mkdir -p $OPENSHIFT_DATA_DIR/solr.home/lib;
-  mkdir -p $OPENSHIFT_DATA_DIR/solr.home/collection1/lib;
-  
-  # Copy over the key libraries that support the example collection to solr.home/lib (shared libs) and solr.home/collection1/lib (plugins)
-  cp -R solr-4.7.1/example/lib/ext/* $OPENSHIFT_DATA_DIR/solr.home/lib;  
-  cp -R solr-4.7.1/dist/solr-cell-*.jar solr-4.7.1/dist/solr-clustering-*.jar solr-4.7.1/dist/solr-langid-*.jar solr-4.7.1/dist/solr-velocity-*.jar $OPENSHIFT_DATA_DIR/solr.home/collection1/lib;
-  cp -R solr-4.7.1/contrib/clustering/ solr-4.7.1/contrib/extraction/ solr-4.7.1/contrib/langid/ solr-4.7.1/contrib/velocity/ $OPENSHIFT_DATA_DIR/solr.home/collection1/lib; 
+  ./build
+fi;
 
-  # Copy over initial configuration - this will be replaced by the configuration setup in the repository on deployment
-  cp -R $OPENSHIFT_REPO_DIR/solr.home/* $OPENSHIFT_DATA_DIR/solr.home/;
-  
-  # Copy over the Solr WAR to the ROOT of the JBoss Container
-  cp -R solr-4.7.1/dist/solr-4.7.1.war $OPENSHIFT_REPO_DIR/webapps/ROOT.war
-fi
-
-# Copy over configuration - this will be replaced by the configuration setup in the repository on deployment
+# Copy over configuration
 cp -R $OPENSHIFT_REPO_DIR/solr.home/* $OPENSHIFT_DATA_DIR/solr.home/;
+
