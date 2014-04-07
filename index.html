@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>openshift-solr-quickstart by Categorize</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>openshift-solr-quickstart</h1>
+        <p>An OpenShift Quick Start for Apache Solr 4.7.1</p>
+
+        <p class="view"><a href="https://github.com/Categorize/openshift-solr-quickstart">View the Project on GitHub <small>Categorize/openshift-solr-quickstart</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Categorize/openshift-solr-quickstart/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Categorize/openshift-solr-quickstart/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Categorize/openshift-solr-quickstart">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="openshift-apache-solr-471-quickstart" class="anchor" href="#openshift-apache-solr-471-quickstart"><span class="octicon octicon-link"></span></a>OpenShift Apache Solr 4.7.1 Quickstart</h2>
+
+<p>This is an OpenShift Quickstart repository to help you get Apache Solr 4.7.1 up and running quickly.</p>
+
+<h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>To install the quick start use the following commands</p>
+
+<pre><code># Create your application to host your Apache Solr instance using jbossews cartridge
+rhc app create solr jbossews-2.0
+
+# Remove build material
+git rm -rf src/ pom.xml
+git commit -a -m "Removing default files"
+
+# Pull in quickstart
+git remote add upstream -m master https://github.com/Categorize/openshift-solr-quickstart.git
+git pull -s recursive -X theirs upstream master
+
+# Customise and then commit changes
+git commit -am "Added Solr Quickstart"
+git push
+</code></pre>
+
+<h3>
+<a name="what-was-done" class="anchor" href="#what-was-done"><span class="octicon octicon-link"></span></a>What Was Done</h3>
+
+<p>Using the quick start an Apache Solr instance is created using the example collection found within the binary distribution of Apache Solr.</p>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>Having pushed the updated code you should find the Solr Admin URL on:</p>
+
+<pre><code>http://solr-&lt;domainname&gt;.rhcloud.com/
+</code></pre>
+
+<p>Before using the Solr instance for development you will need to customise the configuration and schema. To do this you need to adjust the <a href="http://wiki.apache.org/solr/SolrConfigXml">solrconfig.xml</a> and <a href="http://wiki.apache.org/solr/SchemaXml">schema.xml</a> within solr.home based on your needs.</p>
+
+<h3>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h3>
+
+<p>This quick start is provided provided "as is", with absolutely no warranty expressed or implied. Any use is at your own risk.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Categorize">Categorize</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40347187-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
