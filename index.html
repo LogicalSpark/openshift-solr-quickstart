@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>openshift-solr-quickstart</h1>
-        <p>An OpenShift Quick Start for Apache Solr 4.7.1</p>
+        <p>An OpenShift Quick Start for Apache Solr 4.8.1</p>
 
         <p class="view"><a href="https://github.com/Categorize/openshift-solr-quickstart">View the Project on GitHub <small>Categorize/openshift-solr-quickstart</small></a></p>
 
@@ -29,9 +29,9 @@
       </header>
       <section>
         <h2>
-<a name="openshift-apache-solr-471-quickstart" class="anchor" href="#openshift-apache-solr-471-quickstart"><span class="octicon octicon-link"></span></a>OpenShift Apache Solr 4.7.1 Quickstart</h2>
+<a name="openshift-apache-solr-481-quickstart" class="anchor" href="#openshift-apache-solr-481-quickstart"><span class="octicon octicon-link"></span></a>OpenShift Apache Solr 4.8.1 Quickstart</h2>
 
-<p>This is an OpenShift Quickstart repository to help you get Apache Solr 4.7.1 up and running quickly.</p>
+<p>This is an OpenShift Quickstart repository to help you get Apache Solr 4.8.1 up and running quickly.</p>
 
 <h3>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
@@ -49,9 +49,43 @@ git commit -a -m "Removing default files"
 git remote add upstream -m master https://github.com/Categorize/openshift-solr-quickstart.git
 git pull -s recursive -X theirs upstream master
 
-# Customise and then commit changes
+# Edit tomcat-users.xml and web.xml (see below)
+# Edit schema.xml and solrconfig.xml in the solr.home/collection1/conf/ folder
+# Any additional customization and then commit changes
 git commit -am "Added Solr Quickstart"
 git push
+</code></pre>
+
+<h3>
+<a name="tomcat-security" class="anchor" href="#tomcat-security"><span class="octicon octicon-link"></span></a>Tomcat Security</h3>
+
+<p>Edit .openshift/conf/tomcat-users.xml. Replace everything within the <code>&lt;tomcat-user&gt;</code> element with (using your own username and password) and save:</p>
+
+<pre><code>  &lt;role rolename="manager-gui"/&gt;
+  &lt;role rolename="solr_admin"/&gt;
+  &lt;user username="userxxxx" password="passwordxxx" roles="manager-gui,solr_admin"/&gt;
+</code></pre>
+
+<h3>
+<a name="optional-solr-security" class="anchor" href="#optional-solr-security"><span class="octicon octicon-link"></span></a>Optional Solr Security</h3>
+
+<p>Edit web.xml by and going to .openshift/conf/web.xml
+Add the following lines within the <code>&lt;web-app&gt;</code> element and save the war file:</p>
+
+<pre><code>  &lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+      &lt;web-resource-name&gt;Solr Lockdown&lt;/web-resource-name&gt;
+      &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+      &lt;role-name&gt;solr_admin&lt;/role-name&gt;
+      &lt;role-name&gt;admin&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+  &lt;/security-constraint&gt;
+  &lt;login-config&gt;
+    &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+    &lt;realm-name&gt;Solr&lt;/realm-name&gt;
+  &lt;/login-config&gt; 
 </code></pre>
 
 <h3>
