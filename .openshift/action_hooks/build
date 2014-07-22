@@ -1,7 +1,8 @@
+SOLR_VERSION=4.9.0
 cd $OPENSHIFT_DATA_DIR
 if [ ! -d $OPENSHIFT_DATA_DIR/solr.home ]; then
   # Get latest Apache Solr binary package
-  wget -c http://apache.org/dist/lucene/solr/4.8.1/solr-4.8.1.tgz && tar zxf solr-4.8.1.tgz;
+  wget -c http://apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz && tar zxf solr-$SOLR_VERSION.tgz;
   
   # Create Solr Home directory structure
   mkdir -p $OPENSHIFT_DATA_DIR/solr.home;
@@ -9,13 +10,13 @@ if [ ! -d $OPENSHIFT_DATA_DIR/solr.home ]; then
   mkdir -p $OPENSHIFT_DATA_DIR/solr.home/collection1/lib;
   
   # Copy over the key libraries that support the example collection to solr.home/lib (shared libs) and solr.home/collection1/lib (plugins)
-  cp -R solr-4.8.1/example/lib/ext/* $OPENSHIFT_DATA_DIR/solr.home/lib;  
-  cp -R solr-4.8.1/dist/solr-cell-*.jar solr-4.8.1/dist/solr-clustering-*.jar solr-4.8.1/dist/solr-langid-*.jar solr-4.8.1/dist/solr-velocity-*.jar $OPENSHIFT_DATA_DIR/solr.home/collection1/lib;
-  cp -R solr-4.8.1/contrib/clustering/ solr-4.8.1/contrib/extraction/ solr-4.8.1/contrib/langid/ solr-4.8.1/contrib/velocity/ $OPENSHIFT_DATA_DIR/solr.home/collection1/lib; 
+  cp -R solr-$SOLR_VERSION/example/lib/ext/* $OPENSHIFT_DATA_DIR/solr.home/lib;  
+  cp -R solr-$SOLR_VERSION/dist/solr-cell-*.jar solr-$SOLR_VERSION/dist/solr-clustering-*.jar solr-$SOLR_VERSION/dist/solr-langid-*.jar solr-$SOLR_VERSION/dist/solr-velocity-*.jar $OPENSHIFT_DATA_DIR/solr.home/collection1/lib;
+  cp -R solr-$SOLR_VERSION/contrib/clustering/ solr-$SOLR_VERSION/contrib/extraction/ solr-$SOLR_VERSION/contrib/langid/ solr-$SOLR_VERSION/contrib/velocity/ $OPENSHIFT_DATA_DIR/solr.home/collection1/lib; 
 
   # Copy over initial configuration - this will be replaced by the configuration setup in the repository on deployment
   cp -R $OPENSHIFT_REPO_DIR/solr.home/* $OPENSHIFT_DATA_DIR/solr.home/;
   
   # Copy over the Solr WAR to the ROOT of the JBoss Container
-  cp -R solr-4.8.1/dist/solr-4.8.1.war $OPENSHIFT_REPO_DIR/webapps/ROOT.war
+  cp -R solr-$SOLR_VERSION/dist/solr-$SOLR_VERSION.war $OPENSHIFT_REPO_DIR/webapps/ROOT.war
 fi

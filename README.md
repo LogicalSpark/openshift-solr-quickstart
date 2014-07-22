@@ -1,6 +1,6 @@
-## OpenShift Apache Solr 4.8.1 Quickstart
+## OpenShift Apache Solr 4.9.0 Quickstart
 
-This is an OpenShift Quickstart repository to help you get Apache Solr 4.8.1 up and running quickly.
+This is an OpenShift Quickstart repository to help you get Apache Solr 4.9.0 up and running quickly.
 
 ### Installation
 
