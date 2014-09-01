@@ -14,7 +14,7 @@ To install the quick start use the following commands
     git commit -a -m "Removing default files"
     
     # Pull in quickstart
-    git remote add upstream -m master https://github.com/Categorize/openshift-solr-quickstart.git
+    git remote add upstream -m master https://github.com/LogicalSpark/openshift-solr-quickstart.git
     git pull -s recursive -X theirs upstream master
     
     # Edit tomcat-users.xml and web.xml (see below)
