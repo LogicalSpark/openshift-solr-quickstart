@@ -1,4 +1,4 @@
-## OpenShift Apache Solr 4.9.0 Quickstart
+## OpenShift Apache Solr 4.10.0 Quickstart
 
 This is an OpenShift Quickstart repository to help you get Apache Solr 4.10.0 up and running quickly.
 
