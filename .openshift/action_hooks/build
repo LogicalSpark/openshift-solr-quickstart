@@ -1,4 +1,4 @@
-SOLR_VERSION=4.10.1
+SOLR_VERSION=4.10.2
 cd $OPENSHIFT_DATA_DIR
 if [ ! -d $OPENSHIFT_DATA_DIR/solr.home ]; then
   # Get latest Apache Solr binary package
